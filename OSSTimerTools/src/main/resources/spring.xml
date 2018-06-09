@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--bean工厂类-->
+    <bean id="beanFactory" class="com.ztesoft.iom.common.util.BeanFactory" scope="singleton"></bean>
+
+    <!--文件处理类-->
+    <bean id="fileUtil" class="com.ztesoft.iom.common.util.FileUtil" scope="singleton"></bean>
+
+    <!--md5处理类-->
+    <bean id="md5Util" class="com.ztesoft.iom.common.util.MD5Util" scope="singleton"></bean>
+
+    <!--静态参数处理类-->
+    <bean id="paramConfig" class="com.ztesoft.iom.common.util.ParamConfig" scope="singleton"></bean>
+
+    <!--ftp处理类-->
+    <bean id="ftpUtil" class="com.ztesoft.iom.common.util.FTPUtil" scope="prototype"></bean>
+
+    <import resource="spring-datasource.xml" />
+    <import resource="spring-iom.xml" />
+    <import resource="spring-quartz.xml" />
+</beans>

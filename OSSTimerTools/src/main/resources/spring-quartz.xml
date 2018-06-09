@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 线程执行器配置，用于任务注册 -->
+    <bean id="executor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="10" />
+        <property name="maxPoolSize" value="100" />
+        <property name="queueCapacity" value="500" />
+    </bean>
+
+    <!-- 预处理群障树定时任务开始 -->
+    <!-- 预处理群障树定时任务业务对象 -->
+    <bean id="pretreatmentAvoidanceGroupObject" class="com.ztesoft.iom.quartz.service.PretreatmentAvoidanceGroup" />
+
+    <!-- 预处理群障树定时任务调度业务 -->
+    <bean id="pretreatmentAvoidanceGroupObjectJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="pretreatmentAvoidanceGroupObject" />
+        <property name="targetMethod" value="execute" />
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <!-- 预处理群障树定时任务调度条件：每隔5分钟执行一次 -->
+    <bean id="pretreatmentAvoidanceGroupObjectJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="pretreatmentAvoidanceGroupObjectJob" />
+        <property name="cronExpression" value="0 0/5 * * * ?" />
+    </bean>
+    <!-- 预处理群障树定时任务结束 -->
+
+    <!-- 预处理公告树定时任务开始 -->
+    <!-- 预处理公告树定时任务业务对象 -->
+    <bean id="pretreatmentAnnouncementObject" class="com.ztesoft.iom.quartz.service.PretreatmentAnnouncement" />
+
+    <!-- 预处理公告树定时任务调度业务 -->
+    <bean id="pretreatmentAnnouncementObjectJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="pretreatmentAnnouncementObject" />
+        <property name="targetMethod" value="execute" />
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <!-- 预处理公告树定时任务调度条件：每隔5分钟执行一次 -->
+    <bean id="pretreatmentAnnouncementObjectJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="pretreatmentAnnouncementObjectJob" />
+        <property name="cronExpression" value="0 0/5 * * * ?" />
+    </bean>
+    <!-- 预处理公告树定时任务结束 -->
+
+    <!-- SVN更新日志入库定时任务开始 -->
+    <!-- SVN更新日志入库定时任务业务对象 -->
+    <bean id="svnLogListTimerObject" class="com.ztesoft.iom.quartz.service.SvnLogListTimer" />
+
+    <!-- SVN更新日志入库定时任务调度业务 -->
+    <bean id="svnLogListTimerObjectJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="svnLogListTimerObject" />
+        <property name="targetMethod" value="execute" />
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <!-- SVN更新日志入库定时任务调度条件：每隔3分钟执行一次 -->
+    <bean id="svnLogListTimerObjectJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="svnLogListTimerObjectJob" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
+    </bean>
+    <!-- SVN更新日志入库定时任务结束 -->
+
+    <!-- 主机信息采集定时任务开始 -->
+    <!-- 主机信息采集定时任务业务对象 -->
+    <bean id="linuxInfoGatherTimerObject" class="com.ztesoft.iom.quartz.service.LinuxInfoGatherTimer" />
+
+    <!-- 主机信息采集定时任务调度业务 -->
+    <bean id="linuxInfoGatherTimerObjectJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="linuxInfoGatherTimerObject" />
+        <property name="targetMethod" value="execute" />
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <!-- 主机信息采集定时任务调度条件：每隔3分钟执行一次 -->
+    <bean id="linuxInfoGatherTimerObjectJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="linuxInfoGatherTimerObjectJob" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
+    </bean>
+    <!-- 主机信息采集定定时任务结束 -->
+
+    <!-- 外线施工签名图片合并定时任务开始 -->
+    <!-- 外线施工签名图片任务业务对象 -->
+    <bean id="workOrderConfirmPicMergeTimerObject" class="com.ztesoft.iom.quartz.service.WorkOrderConfirmPicMergeTimer" />
+
+    <!-- 外线施工签名图片定时任务调度业务 -->
+    <bean id="workOrderConfirmPicMergeTimerObjectJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="workOrderConfirmPicMergeTimerObject" />
+        <property name="targetMethod" value="execute" />
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <!-- 外线施工签名图片定时任务调度条件：每隔3分钟执行一次 -->
+    <bean id="workOrderConfirmPicMergeTimerObjectJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="workOrderConfirmPicMergeTimerObjectJob" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
+    </bean>
+    <!-- 外线施工签名图片定时任务结束 -->
+
+    <!-- 客服系统满意度问卷采集定时任务开始 -->
+    <!-- 客服系统满意度问卷采集定时任务业务对象 -->
+    <bean id="satisfactionInfoScanTimerObject" class="com.ztesoft.iom.quartz.service.SatisfactionInfoScanTimer" />
+
+    <!-- 客服系统满意度问卷采集定时任务调度业务 -->
+    <bean id="satisfactionInfoScanTimerObjectJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="satisfactionInfoScanTimerObject" />
+        <property name="targetMethod" value="execute" />
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <!-- 客服系统满意度问卷采集定时任务调度条件：每隔15分钟执行一次 -->
+    <bean id="satisfactionInfoScanTimerObjectJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="satisfactionInfoScanTimerObjectJob" />
+        <property name="cronExpression" value="0 0/15 * * * ?" />
+    </bean>
+    <!-- 客服系统满意度问卷采集定时任务结束 -->
+
+    <!-- 耗材信息统计报表入库定时任务开始 -->
+    <!-- 耗材信息统计报表入库定时任务业务对象 -->
+    <bean id="materialReportTimerObject" class="com.ztesoft.iom.quartz.service.MaterialReportTimer" />
+
+    <!-- 耗材信息统计报表入库定时任务调度业务 -->
+    <bean id="materialReportTimerObjectJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="materialReportTimerObject" />
+        <property name="targetMethod" value="execute" />
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <!-- 耗材信息统计报表入库定时任务调度条件：每隔3分钟执行一次 -->
+    <bean id="materialReportTimerObjectJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="materialReportTimerObjectJob" />
+        <property name="cronExpression" value="0 0/1 * * * ?" />
+    </bean>
+    <!-- 耗材信息统计报表入库定时任务结束 -->
+
+    <!-- 设置调度 -->
+    <bean  id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="waitForJobsToCompleteOnShutdown" value="true" />
+        <property name="triggers">
+            <list>
+                <!--测试环境可停用-->
+                <!--<ref bean="pretreatmentAvoidanceGroupObjectJobCronTrigger" />-->
+                <!--<ref bean="pretreatmentAnnouncementObjectJobCronTrigger" />-->
+                <!--<ref bean="svnLogListTimerObjectJobCronTrigger" />-->
+                <!--<ref bean="satisfactionInfoScanTimerObjectJobCronTrigger" />-->
+                <ref bean="workOrderConfirmPicMergeTimerObjectJobCronTrigger" />
+                <ref bean="materialReportTimerObjectJobCronTrigger" />
+                <!--测试环境不可停用-->
+                <ref bean="linuxInfoGatherTimerObjectJobCronTrigger" />
+            </list>
+        </property>
+        <property name="taskExecutor" ref="executor" />
+    </bean>
+</beans>

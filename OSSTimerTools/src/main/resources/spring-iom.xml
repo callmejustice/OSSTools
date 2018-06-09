@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="avoidanceGroupDaoImpl" class="com.ztesoft.iom.pretreatment.dao.impl.AvoidanceGroupDaoImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+
+    <bean id="announcementDaoImpl" class="com.ztesoft.iom.pretreatment.dao.impl.AnnouncementDaoImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+
+    <bean id="svnLogDaoImpl" class="com.ztesoft.iom.svn.dao.impl.SvnLogDaoImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+
+    <bean id="gatherDaoImpl" class="com.ztesoft.iom.gather.dao.impl.GatherDaoImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+
+    <bean id="workOrderDaoImpl" class="com.ztesoft.iom.order.dao.impl.WorkOrderDaoImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+
+    <bean id="satisfactionDaoImpl" class="com.ztesoft.iom.satisfaction.dao.impl.SatisfactionDaoImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+
+    <bean id="materialDaoImpl" class="com.ztesoft.iom.workOrder.material.dao.impl.MaterialDaoImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+</beans>
