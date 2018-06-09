@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 单例工厂类 -->
+    <bean id="beanFactory" class="com.ztesoft.iom.common.util.BeanFactory" scope="singleton"></bean>
+
+    <bean id="objectMapper" class="com.ztesoft.iom.common.util.CustomObjectMapper" init-method="init">
+        <property name="camelCaseToLowerCaseWithUnderscores" value="true"/>
+        <property name="dateFormatPattern" value="yyyy-MM-dd HH:mm:ss"/>
+    </bean>
+
+    <!-- 支持上传文件，支持将MultipartFile转换为File -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 100M -->
+        <property name="maxUploadSize" value="104857600"></property>
+        <!-- 上传文件大小若小于此参数，则不会生成临时文件 -->
+        <property name="maxInMemorySize" value="2048" />
+    </bean>
+
+    <import resource="spring-datasource.xml"/>
+    <import resource="spring-service.xml"/>
+    <import resource="rest-servlet.xml"/>
+</beans>

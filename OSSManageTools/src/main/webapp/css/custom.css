@@ -1,0 +1,57 @@
+body .layui-form-checked i, .layui-form-checked:hover i {
+    color: #1E9FFF !important;
+}
+
+body .layui-form-checked, .layui-form-checked:hover {
+    border-color: #1E9FFF !important;
+}
+
+body .layui-form-checked span, .layui-form-checked:hover span {
+    background-color: #1E9FFF !important;
+}
+
+body .laydate-theme-custom-theme .layui-laydate-header {
+    background-color: #1E9FFF !important;
+    color: #FFFFFF;
+}
+
+body .laydate-theme-custom-theme .layui-laydate-header i {
+    color: #FFFFFF;
+}
+
+body .laydate-theme-custom-theme .layui-this {
+    background-color: #1E9FFF !important;
+}
+
+body .layui-laypage-custom-theme .layui-laypage-curr .layui-laypage-em {
+    background-color: #1E9FFF !important;
+}
+
+body .custom-content .layui-layer-title {
+    background: #1E9FFF;
+    color: #FFFFFF;
+    border: none;
+}
+
+body .custom-content .layui-layer-setwin .layui-layer-close1 {
+    background-position: -180px -32px;
+    top: -8px;
+    width: 30px;
+    height: 30px;
+}
+
+body .layui-bg-blue .layui-nav-child dd.layui-this, body .layui-bg-blue .layui-nav-child dd.layui-this a {
+    background-color: #1E9FFF !important;
+}
+
+.red {
+    color: #FF0000;
+}
+
+.molv {
+    color: #009688;
+}
+
+.gray {
+    color: #EEEEEE;
+}

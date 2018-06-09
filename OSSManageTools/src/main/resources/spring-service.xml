@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 为了避免并发问题，非全局使用的业务类都采用原型模式，每次用getBean获取都生成一个新的实例 -->
+    <!-- 工具类开始 -->
+    <bean id="wordUtils" class="com.ztesoft.iom.common.util.WordUtils" scope="singleton"></bean>
+    <!-- 工具类结束 -->
+    <!-- svn模块开始 -->
+    <bean id="svnLogService" class="com.ztesoft.iom.manage.svn.service.SVNLogService" scope="prototype"></bean>
+    <!-- svn模块结束 -->
+    <!-- 研发模块配置开始 -->
+    <bean id="developOrderManager" class="com.ztesoft.iom.manage.develop.service.DevelopOrderManager"
+          scope="prototype"></bean>
+
+
+    <bean id="developOrderDaoImpl" class="com.ztesoft.iom.manage.develop.dao.impl.DevelopOrderDaoImpl"
+          scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+    <!-- 研发模块配置结束 -->
+    <!-- 需求模块配置开始 -->
+    <bean id="requirementsManager" class="com.ztesoft.iom.manage.requirements.service.RequirementsManager"
+          scope="prototype"></bean>
+
+
+    <bean id="requirementsOrderDaoImpl"
+          class="com.ztesoft.iom.manage.requirements.dao.impl.RequirementsOrderDaoImpl"
+          scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+    <!-- 需求模块配置结束 -->
+    <!-- 流程模块配置开始 -->
+    <bean id="flowEngine" class="com.ztesoft.iom.manage.flow.service.FlowEngine" scope="prototype"></bean>
+    <bean id="flowEngineDaoImpl" class="com.ztesoft.iom.manage.flow.dao.impl.FlowEngineDaoImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+    <!-- 流程模块配置结束 -->
+
+    <!-- 参数映射模块配置开始，全局使用，采用单例模式 -->
+    <bean id="paramMappingService" class="com.ztesoft.iom.manage.param.service.ParamMappingService"
+          scope="singleton"></bean>
+
+    <bean id="paramMappingDaoImpl" class="com.ztesoft.iom.manage.param.dao.impl.ParamMappingDaoImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+
+    <bean id="paramConfigDaoImpl" class="com.ztesoft.iom.manage.param.dao.impl.ParamConfigDaoImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+    <!-- 参数映射模块配置结束 -->
+    <!-- 任务单工单模块配置开始 -->
+    <bean id="workOrderDaoImpl" class="com.ztesoft.iom.manage.workOrder.dao.impl.WorkOrderDaoImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+    <!-- 任务单工单模块配置结束 -->
+    <!-- 维护模块开始 -->
+    <bean id="webserviceClient" class="com.ztesoft.iom.manage.webservice.service.WebserviceClient" scope="prototype">
+    </bean>
+
+    <bean id="resourceWebserviceBuilder"
+          class="com.ztesoft.iom.manage.webservice.service.impl.ResourceWebserviceBuilder" scope="prototype">
+    </bean>
+
+    <bean id="eomsWebserviceBuilder"
+          class="com.ztesoft.iom.manage.webservice.service.impl.EOMSWebserviceBuilder" scope="prototype">
+    </bean>
+
+    <bean id="monitorService" class="com.ztesoft.iom.manage.monitor.service.MonitorService" scope="prototype">
+    </bean>
+
+    <bean id="monitorInfoDaoImpl" class="com.ztesoft.iom.manage.monitor.dao.impl.MonitorInfoDaoImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+
+    <bean id="kbsManager" class="com.ztesoft.iom.manage.kbs.service.KBSManager"
+          scope="prototype"></bean>
+
+    <bean id="kbsDaoImpl" class="com.ztesoft.iom.manage.kbs.dao.impl.KBSDaoImpl"
+          scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+    <!-- 维护模块结束 -->
+</beans>
