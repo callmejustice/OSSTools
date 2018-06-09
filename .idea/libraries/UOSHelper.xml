@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="UOSHelper">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/OSSManageTools/src/main/webapp/WEB-INF/lib/UOSHelper.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="OAAS_EJB20">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/OSSManageTools/src/main/webapp/WEB-INF/lib/OAAS_EJB20.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

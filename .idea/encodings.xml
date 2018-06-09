@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/../uos/uosflow5.1/src/com/zterc/uos/workflow/client/UOSFlowClient.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../uos/uosflow5.1/src/com/zterc/uos/workflow/wfmc/wapi/WMDataChunk.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../uos/uosflow5.1/src/com/zterc/uos/workflow/wfmc/wapi/WMProcessInstance.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../uos/uoshelper/src/com/zterc/uos/UOSError.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../uos/uoshelper/src/com/zterc/uos/UOSException.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/../uos/uoshelper/src/com/zterc/uos/exception/CommonError.java" charset="GBK" />
+    <file url="file://D:/QQFiles/88288385/FileRecv/开通小工具及涉及场景/WithOutNextLinkManager.java" charset="GBK" />
+  </component>
+</project>

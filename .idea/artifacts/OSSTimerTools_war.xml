@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="OSSTimerTools:war">
+    <output-path>$PROJECT_DIR$/OSSTimerTools/target</output-path>
+    <root id="archive" name="OSSTimerTools.war">
+      <element id="artifact" artifact-name="OSSTimerTools:war exploded" />
+    </root>
+  </artifact>
+</component>

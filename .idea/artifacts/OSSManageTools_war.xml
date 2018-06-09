@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="OSSManageTools:war">
+    <output-path>$PROJECT_DIR$/OSSManageTools/target</output-path>
+    <root id="archive" name="OSSManageTools.war">
+      <element id="artifact" artifact-name="OSSManageTools:war exploded" />
+    </root>
+  </artifact>
+</component>
