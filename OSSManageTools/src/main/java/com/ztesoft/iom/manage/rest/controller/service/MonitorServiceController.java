@@ -1,9 +1,12 @@
 package com.ztesoft.iom.manage.rest.controller.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ztesoft.iom.common.util.BeanFactory;
 import com.ztesoft.iom.common.vo.Response;
 import com.ztesoft.iom.manage.monitor.service.MonitorService;
+import com.ztesoft.iom.manage.rest.dao.ConfigDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +43,26 @@ public class MonitorServiceController {
             response.failure("获取采集信息失败");
         }
         log.info("getGatherInfo出口……");
+        return response;
+    }
+
+    @RequestMapping(value = "/getInterfaceTypeConfig.do", method = RequestMethod.POST)
+    public @ResponseBody
+    Response getInterfaceTypeConfig(HttpSession httpSession, @RequestBody JSONObject qryJson) {
+        log.info("getGatherInfo入口……");
+        Response response = new Response();
+        ConfigDAO configDAO = (ConfigDAO) BeanFactory.getApplicationContext().getBean("configDAOImpl");
+        response.success(JSON.toJSONString(configDAO.getInterfaceTypeConfig()));
+        return response;
+    }
+
+    @RequestMapping(value = "/getInterfaceNameConfig.do", method = RequestMethod.POST)
+    public @ResponseBody
+    Response getInterfaceNameConfig(HttpSession httpSession, @RequestBody JSONObject qryJson) {
+        log.info("getGatherInfo入口……");
+        Response response = new Response();
+        ConfigDAO configDAO = (ConfigDAO) BeanFactory.getApplicationContext().getBean("configDAOImpl");
+        response.success(JSON.toJSONString(configDAO.getInterfaceNameConfig(qryJson.get("code"))));
         return response;
     }
 

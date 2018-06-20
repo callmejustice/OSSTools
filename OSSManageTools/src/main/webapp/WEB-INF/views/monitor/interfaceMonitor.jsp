@@ -9,8 +9,6 @@
                         <label class="layui-form-label">接口类型</label>
                         <div class="layui-input-inline">
                             <select name="resourceWebserviceBuilder" id="resourceWebserviceBuilder" lay-filter="resourceWebserviceBuilder">
-                                <option value="resourceWebserviceBuilder" selected>资源接口</option>
-                                <option value="eomsWebserviceBuilder">EOMS接口</option>
                             </select>
                         </div>
                     </div>
@@ -134,13 +132,40 @@
             active[type] ? active[type].call(this) : '';
         });
 
+        getInterfaceTypeConfig(form);
         // 默认加载资源接口
-        setLocalPartName({'value': 'resourceWebserviceBuilder'});
+        //setLocalPartName({'value': 'resourceWebserviceBuilder'});
         // 渲染
         element.init();
         form.render();
 
     });
+
+    function getInterfaceTypeConfig(form) {
+        $.ajax({
+            url: '../../controller/service/monitor/getInterfaceTypeConfig.do',
+            method: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify({
+            }),
+            timeout: 120000,
+            success: function (response) {
+                console.log(response);
+                var list = JSON.parse(response.data);
+                var requestXML = ''
+                //$('#resourceWebserviceBuilder').empty();
+                var options = '';
+                for(var i = 0; i < list.length; i ++) {
+                    //$('#resourceWebserviceBuilder').append('<option value="'+list[i].INTERFACE_TYPE_CODE+'">'+list[i].INTERFACE_TYPE_NAME+'</option>');
+                    options += '<option value="'+list[i].INTERFACE_TYPE_CODE+'">'+list[i].INTERFACE_TYPE_NAME+'</option>';
+                }
+                $('#resourceWebserviceBuilder').html(options);
+                form.render();
+            },error: function (XHR, status, error) {
+            }
+         })
+    }
 
     /**
      * 设置请求报文文本框的内容
@@ -167,15 +192,29 @@
      * @param data
      */
     function setLocalPartName(data) {
-        var options = '';
-        for(var i = 0; i < localPartNameOptions.length; i ++) {
-            if(localPartNameOptions[i].type == data.value) {
-                options += '<option value="' + localPartNameOptions[i].value + '" >' + localPartNameOptions[i].text + '</option>';
+        $.ajax({
+            url: '../../controller/service/monitor/getInterfaceNameConfig.do',
+            method: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify({
+                code : data.value
+            }),
+            timeout: 120000,
+            success: function (response) {
+                console.log(response);
+                var list = JSON.parse(response.data);
+                var requestXML = ''
+                var options = '';
+                for(var i = 0; i < list.length; i ++) {
+                    options += '<option value="'+list[i].VALUE+'">'+list[i].TEXT+'</option>';
+                }
+                $('#localPartName').html(options);
+                setRequestInro({'value': $('#localPartName').val()});
+                layui.form.render();
+            },error: function (XHR, status, error) {
             }
-        }
-        $('#localPartName').html(options);
-
-        setRequestInro({'value': $('#localPartName').val()});
+         })
     }
 
 

@@ -4,12 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.ztesoft.iom.common.util.BeanFactory;
 import com.ztesoft.iom.common.util.ParamConfig;
 import com.ztesoft.iom.common.vo.Response;
+import com.ztesoft.iom.manage.rest.dao.UserDAO;
 import com.ztesoft.iom.manage.svn.service.SVNLogService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * @Description: 登录控制器
@@ -47,7 +49,16 @@ public class LoginServiceController {
             } else {
                 response.failure("用户名或者密码输入错误");
             }
-        } else {
+        } if ("true".equals(ParamConfig.getInstance().getParamValue("dbLogin"))) {
+            UserDAO userDAO = (UserDAO) BeanFactory.getApplicationContext().getBean("userDAOImpl");
+            Map<String, Object> user = userDAO.queryUserByUsername(logonJson.getString("userName"));
+            if(user != null && user.get("PASSWORD").equals(logonJson.getString("password"))) {
+                JSONObject ossLoginUser = new JSONObject();
+                ossLoginUser.put("userName", logonJson.getString("userName"));
+                httpSession.setAttribute("ossLoginUser", ossLoginUser);
+                response.success(returnData);
+            }
+        } else{
             JSONObject ossLoginUser = new JSONObject();
             ossLoginUser.put("userName", logonJson.getString("userName"));
             httpSession.setAttribute("ossLoginUser", ossLoginUser);

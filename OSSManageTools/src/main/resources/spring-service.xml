@@ -81,4 +81,12 @@
         <property name="dataSource" ref="dataSourceIom"/>
     </bean>
     <!-- 维护模块结束 -->
+
+    <bean id="userDAOImpl" class="com.ztesoft.iom.manage.rest.dao.impl.UserDAOImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
+
+    <bean id="configDAOImpl" class="com.ztesoft.iom.manage.rest.dao.impl.ConfigDAOImpl" scope="prototype">
+        <property name="dataSource" ref="dataSourceIom"/>
+    </bean>
 </beans>
