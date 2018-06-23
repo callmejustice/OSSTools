@@ -1,6 +1,7 @@
 package com.ztesoft.iom.manage.rest.controller.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ztesoft.iom.common.util.HttpKit;
 import com.ztesoft.iom.common.vo.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,26 +26,45 @@ public class HttpServiceController {
      * @param speedMonitorJson
      * @return
      */
-    @RequestMapping(value = "/speedMonitor.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/speedMonitor.do",  method = RequestMethod.POST)
     public @ResponseBody
     Response speedMonitor(HttpSession httpSession, @RequestBody JSONObject speedMonitorJson) {
-        log.info("speedMonitor入口……");
         Response response = new Response();
 
-        try {
-            // 调用webservice接口
-            JSONObject paramJson = new JSONObject();
-            paramJson.put("webserviceBeanName", speedMonitorJson.getString("resourceWebserviceBuilder"));
-            paramJson.put("localPartName", speedMonitorJson.getString("localPartName"));
-            paramJson.put("requestXML", speedMonitorJson.getString("requestXML"));
+        JSONObject returnJson = new JSONObject();
+        boolean callFlag = false;
+        Object callResult = null;
 
-            response.failure("未调用接口");
+        // 接口调用起始时间
+        long startMillis = -1;
+        // 接口调用结束时间
+        long endMillis = -1;
+        String errorInfo = "";
+
+        try {
+
+            startMillis = System.currentTimeMillis();
+            callResult = HttpKit.post(speedMonitorJson.getString("url"), speedMonitorJson.getString("requestXML"));
+
+            endMillis = System.currentTimeMillis();
+            callFlag = true;
         } catch (Exception e) {
             log.error("调用http接口异常", e);
-            response.failure(e.getMessage());
+            callFlag = false;
+            errorInfo = e.getMessage();
+        } finally {
+            returnJson.put("callFlag", callFlag);
+            returnJson.put("callResult", callResult);
+            returnJson.put("startMillis", startMillis);
+            returnJson.put("endMillis", endMillis);
+            returnJson.put("errorInfo", errorInfo);
         }
+
+        response.success(returnJson);
         log.info("speedMonitor出口……");
         return response;
     }
+
+
 
 }

@@ -9,7 +9,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>广西移动家宽管理平台-创建任务单</title>
+    <title>广西电信OSS管理平台-创建任务单</title>
     <link rel="stylesheet" href="../../../js/ui/layui/css/layui.css">
     <link rel="stylesheet" href="../../../css/custom.css">
     <style>

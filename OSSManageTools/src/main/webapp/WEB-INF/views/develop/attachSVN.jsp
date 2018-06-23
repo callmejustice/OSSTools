@@ -11,7 +11,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>广西移动家宽管理平台-研发任务单回单</title>
+    <title>广西电信OSS管理平台-研发任务单回单</title>
     <link rel="stylesheet" href="../../../js/ui/layui/css/layui.css">
     <link rel="stylesheet" href="../../../css/custom.css">
     <style>
@@ -35,7 +35,7 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header layui-bg-blue">
-        <div class="layui-logo layui-bg-blue">广西移动家宽管理平台</div>
+        <div class="layui-logo layui-bg-blue">广西电信OSS管理平台</div>
     </div>
     <div class="layui-row"><br/></div>
     <div class="layui-row">

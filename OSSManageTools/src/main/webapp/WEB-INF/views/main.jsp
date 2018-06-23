@@ -6,7 +6,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>广西移动家宽管理平台</title>
+    <title>广西电信OSS管理平台</title>
     <link rel="stylesheet" href="../../js/ui/layui/css/layui.css">
     <link rel="stylesheet" href="../../css/custom.css">
 </head>
@@ -14,7 +14,7 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header layui-bg-blue">
-        <div class="layui-logo layui-bg-blue">广西移动家宽管理平台</div>
+        <div class="layui-logo layui-bg-blue">广西电信OSS管理平台</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left layui-bg-blue" lay-filter="optionsNav"></ul>
         <ul class="layui-nav layui-layout-right layui-bg-blue" lay-filter="loginNav">

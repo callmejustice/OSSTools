@@ -49,7 +49,11 @@
         {'interfaceType': 'webservice', 'type': 'eomsWebserviceBuilder', 'value': 'HomeBroadbandComplaint', 'text': '投诉待办查询接口', 'requestInfo': '{"requestJson":{"opTime":"2018-04-08 13:22:45","sortFieldDeal":"DESC","complaintType":"","sheetId":"","sortField":"SENDTIME","address":"","currentPageIndex":0,"opUserName":"廖国桥","serialNO":"","pageSize":10,"importantCust":"all","opUserId":"liaoguoqiao"},"opType":"gx_op101"}'},
         {'interfaceType': 'webservice', 'type': 'eomsWebserviceBuilder', 'value': 'HomeBroadbandFaultService ', 'text': '网络故障代办', 'requestInfo': '{"requestJson":{"orderState":"unProcessed","importantFlag":"all","sortFieldDeal":"DESC","accountNumber":"","sortField":"SENDTIME","currentPageIndex":0,"pageSize":10,"operateUserId":"liaoguoqiao","keyWord":""},"opType":"sheetListToQuery"}'}
     ];
-    var requestUrl = '';
+    var requestUrl = '../../controller/service/http/speedMonitor.do';
+    var intfUrl = '';
+
+    var interfaceNameList = [];
+    var interfaceTypeList = [];
 
     layui.use(['layer', 'form', 'element'], function () {
         var element = layui.element
@@ -70,7 +74,7 @@
                     dataType: 'json',
                     data: JSON.stringify({
                         resourceWebserviceBuilder: resourceWebserviceBuilder,
-                        localPartName: localPartName,
+                        url: intfUrl,
                         requestXML: requestXML
                     }),
                     timeout: 120000,
@@ -119,6 +123,7 @@
         };
         // 监听下拉框变事件
         form.on('select(resourceWebserviceBuilder)', function (data) {
+            intfUrl = interfaceTypeList[$('#resourceWebserviceBuilder').prop('selectedIndex')].URL;
             setLocalPartName(data);
             element.init();
             form.render();
@@ -153,6 +158,7 @@
             success: function (response) {
                 console.log(response);
                 var list = JSON.parse(response.data);
+                interfaceTypeList = list;
                 var requestXML = ''
                 //$('#resourceWebserviceBuilder').empty();
                 var options = '';
@@ -162,6 +168,11 @@
                 }
                 $('#resourceWebserviceBuilder').html(options);
                 form.render();
+                if(list.length > 0) {
+                    setLocalPartName(list[0].INTERFACE_TYPE_CODE);
+                    element.init();
+                    form.render();
+                }
             },error: function (XHR, status, error) {
             }
          })
@@ -173,7 +184,7 @@
      */
     function setRequestInro(data) {
         var requestXML = ''
-        for(var i = 0; i < localPartNameOptions.length; i ++) {
+        /*for(var i = 0; i < localPartNameOptions.length; i ++) {
             if(localPartNameOptions[i].value == data.value) {
                 requestXML = localPartNameOptions[i].requestInfo;
 
@@ -183,8 +194,8 @@
                     requestUrl = '../../controller/service/http/speedMonitor.do';
                 }
             }
-        }
-        $('#requestXML').val(requestXML);
+        }*/
+        $('#requestXML').val(data.value.REQUESTJSON);
     }
 
     /**
@@ -204,13 +215,16 @@
             success: function (response) {
                 console.log(response);
                 var list = JSON.parse(response.data);
+                interfaceNameList = list;
                 var requestXML = ''
                 var options = '';
                 for(var i = 0; i < list.length; i ++) {
                     options += '<option value="'+list[i].VALUE+'">'+list[i].TEXT+'</option>';
                 }
                 $('#localPartName').html(options);
-                setRequestInro({'value': $('#localPartName').val()});
+                if(interfaceNameList.length > 0) {
+                    setRequestInro({'value': interfaceNameList[0]});
+                }
                 layui.form.render();
             },error: function (XHR, status, error) {
             }
