@@ -1,5 +1,6 @@
 package com.ztesoft.iom.manage.rest.dao.impl;
 
+import com.ztesoft.iom.manage.rest.dao.ClobResultSetExtractor;
 import com.ztesoft.iom.manage.rest.dao.ConfigDAO;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
@@ -15,6 +16,6 @@ public class ConfigDAOImpl extends JdbcDaoSupport implements ConfigDAO {
 
     public List<Map<String, Object>> getInterfaceNameConfig(Object code) {
         String sql = "SELECT * FROM OT_INTERFACE_NAME_CONFIG WHERE TYPE = ?";
-        return this.getJdbcTemplate().queryForList(sql, code);
+        return (List<Map<String, Object>>)this.getJdbcTemplate().query(sql, new Object[]{code},  new ClobResultSetExtractor(new String[]{"REQUESTJSON"}));
     }
 }

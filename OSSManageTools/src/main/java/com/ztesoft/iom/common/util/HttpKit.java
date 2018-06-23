@@ -96,7 +96,8 @@ public class HttpKit {
 		postMethod.setHeader("Accept", "*/*"); 
 		postMethod.setHeader("Connection", "keep-alive"); 
 		postMethod.setHeader("X-Requested-With", "XMLHttpRequest");
-		postMethod.setHeader("User-Agent", "FuckEtl");
+		postMethod.setHeader("User-Agent", "OSSManageTool");
+        postMethod.setHeader("SOAPAction", "");
 		return postMethod;
 	}
 	
